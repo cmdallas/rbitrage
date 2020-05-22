@@ -1,0 +1,73 @@
+apiVersion: workload.crossplane.io/v1alpha1
+kind: KubernetesApplication
+metadata:
+  name: dataplane-west
+  labels:
+    app: dataplane-west
+spec:
+  resourceSelector:
+    matchLabels:
+      app: dataplane-west
+  targetSelector:
+    matchLabels:
+      app: dataplane-west
+  resourceTemplates:
+    - metadata:
+        name: dataplane-west-namespace
+        labels:
+          app: dataplane-west
+      spec:
+        template:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: dataplane
+            labels:
+              app: dataplane
+    - metadata:
+        name: dataplane-west-deployment
+        labels:
+          app: dataplane-west
+      spec:
+        template:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            namespace: dataplane
+            name: dataplane
+            labels:
+              app: dataplane
+          spec:
+            selector:
+              matchLabels:
+                app: dataplane
+            template:
+              metadata:
+                labels:
+                  app: dataplane
+              spec:
+                containers:
+                  - name: dataplane
+                    image: nginx:latest
+                    ports:
+                      - containerPort: 80
+                        name: dataplane
+    - metadata:
+        name: dataplane-west-service
+        labels:
+          app: dataplane-west
+      spec:
+        template:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            namespace: dataplane
+            name: dataplane
+            labels:
+              app: dataplane
+          spec:
+            ports:
+              - port: 80
+            selector:
+              app: dataplane
+            type: LoadBalancer
