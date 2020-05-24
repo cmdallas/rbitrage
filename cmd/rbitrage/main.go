@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/alecthomas/kong"
 	"github.com/cmdallas/rbitrage/cmd/rbitrage/core"
+	"github.com/cmdallas/rbitrage/pkg/config"
 )
 
 func main() {
@@ -19,4 +22,8 @@ func main() {
 
 	err := ctx.Run(&cli.Globals)
 	ctx.FatalIfErrorf(err)
+
+	cfg, err := config.NewConfig(cli.Globals.Config)
+	ctx.FatalIfErrorf(err)
+	fmt.Println(cfg)
 }

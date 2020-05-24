@@ -8,7 +8,7 @@ import (
 
 // Globals global options
 type Globals struct {
-	Config  string      `help:"Location of config file" default:"~/.rbitrage" type:"path"`
+	Config  string      `help:"Location of config file" default:"~/go/src/github.com/cmdallas/rbitrage/examples/config/.rbitrage.yaml" type:"path"`
 	Debug   bool        `short:"d" help:"Enable debug mode"`
 	Version versionFlag `name:"version" help:"Print version and quit"`
 }
