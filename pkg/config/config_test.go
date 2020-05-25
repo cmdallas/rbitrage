@@ -28,20 +28,13 @@ func TestValidateConfigPath(t *testing.T) {
 }
 
 func TestNewConfig(t *testing.T) {
-	expectedProviders := []string{"aws"}
-
 	c, err := NewConfig(goodConfigPath)
 	switch {
 	case err != nil:
 		t.Log(err)
 		t.Fail()
-	case c.Providers != nil:
-		for i := range c.Providers {
-			if c.Providers[i] != expectedProviders[i] {
-				t.Logf("expected %s, got %s\n", expectedProviders, c.Providers)
-				t.Fail()
-			}
-		}
+	case c.Applications != nil:
+		return
 	}
 
 	_, err = NewConfig(dirConfigPath)

@@ -1,3 +1,26 @@
 ---
-providers:
-  - aws
+# applications Specific workloads are referred to as applications.
+applications:
+  # name The name of the specific application
+  - name: "rbitrage-example"
+    # properties Properties specific to the application
+    properties:
+      # providers Cloud/platform providers that rbitrage will attempt to use
+      providers:
+        # name The name of the cloud provider. Valid choices are ["aws", "gcp", "az"]
+        - name: "aws"
+          # nodes Node specific configuration
+          nodes:
+            # typeOverride Define a specific instance type to override vcpu/mem based selections
+            # typeOverride: "m3.medium"
+
+            # vcpu The desired number of virtual cpus
+            vcpu: 2
+            # memory The desired number of memory (GiB)
+            memory: 8
+            # groupName The name of the group of nodes
+            groupName: "argo-west-nodes"
+            # minSize The minimum size of the node group
+            minSize: 1
+            # maxSize The maximum size of the node group
+            maxSize: 2

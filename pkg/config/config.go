@@ -7,9 +7,32 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// Application returns a new rbitrage application configuration.
+// An Application should be thought of as a specfic user workload.
+type Application struct {
+	// Name The name of the specific application
+	Name string `yaml:"name"`
+	// Properties Properties specific to the application
+	Properties struct {
+		// Providers Cloud/platform providers that rbitrage will attempt to use
+		Providers []struct {
+			// Name The name of the cloud provider. Valid choices are ["aws", "gcp", "az"]
+			Name  string `yaml:"name"`
+			Nodes struct {
+				TypeOverride string `yaml:"typeOverride"`
+				VCPU         int    `yaml:"vcpu"`
+				Memory       int    `yaml:"memory"`
+				GroupName    string `yaml:"groupName"`
+				MinSize      int    `yaml:"minSize"`
+				MaxSize      int    `yaml:"maxSize"`
+			} `yaml:"nodes"`
+		} `yaml:"providers"`
+	} `yaml:"properties"`
+}
+
 // Config struct for rbitrage configuration
 type Config struct {
-	Providers []string `yaml:"providers"`
+	Applications []Application `yaml:"applications"`
 }
 
 // NewConfig returns a new decoded Config
