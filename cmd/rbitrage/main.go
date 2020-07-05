@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/alecthomas/kong"
 	"github.com/cmdallas/rbitrage/cmd/rbitrage/core"
 	"github.com/cmdallas/rbitrage/pkg/config"
+	"github.com/cmdallas/rbitrage/pkg/rbitrageur"
 )
 
 func main() {
@@ -25,5 +24,6 @@ func main() {
 
 	cfg, err := config.NewConfig(cli.Globals.Config)
 	ctx.FatalIfErrorf(err)
-	fmt.Println(cfg)
+
+	rbitrageur.Arbitrate(cfg)
 }

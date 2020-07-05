@@ -19,12 +19,13 @@ type Application struct {
 			// Name The name of the cloud provider. Valid choices are ["aws", "gcp", "az"]
 			Name  string `yaml:"name"`
 			Nodes struct {
-				TypeOverride string `yaml:"typeOverride"`
-				VCPU         int    `yaml:"vcpu"`
-				Memory       int    `yaml:"memory"`
-				GroupName    string `yaml:"groupName"`
-				MinSize      int    `yaml:"minSize"`
-				MaxSize      int    `yaml:"maxSize"`
+				TypeOverrides []string `yaml:"typeOverrides"`
+				VCPU          int      `yaml:"vcpu"`
+				Memory        int      `yaml:"memory"`
+				GroupName     string   `yaml:"groupName"`
+				MinSize       int      `yaml:"minSize"`
+				MaxSize       int      `yaml:"maxSize"`
+				Region        string   `yaml:"region"`
 			} `yaml:"nodes"`
 		} `yaml:"providers"`
 	} `yaml:"properties"`

@@ -38,5 +38,5 @@ func (cmd *RunCmd) Run(globals *Globals) error {
 // CLI All rbitrage CLI options
 type CLI struct {
 	Globals
-	Run RunCmd `cmd help:"run rbitrage"`
+	Run RunCmd `cmd help:"start rbitrage"`
 }

@@ -11,8 +11,10 @@ applications:
         - name: "aws"
           # nodes Node specific configuration
           nodes:
-            # typeOverride Define a specific instance type to override vcpu/mem based selections
-            # typeOverride: "m3.medium"
+            # typeOverrides Define specific instance types to override vcpu/mem based selections
+            # Rbitrage will attempt to use the cheapest possible override
+            typeOverrides:
+              - "m3.medium"
 
             # vcpu The desired number of virtual cpus
             vcpu: 2
@@ -24,3 +26,5 @@ applications:
             minSize: 1
             # maxSize The maximum size of the node group
             maxSize: 2
+            # region The region in which to create the nodes
+            region: "us-west-2"
